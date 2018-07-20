@@ -36,20 +36,12 @@ EditText editText;
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
             } else {
-                // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_WRITE_EXTERNAL_STORAGE);
 
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
             }
         } else {
-            // Permission has already been granted
         }
     }
 
@@ -58,11 +50,9 @@ EditText editText;
         switch (requestCode) {
             case 0:
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    //Permission granted.
-                    //Continue with writing files...
+
                 }
                 else{
-                    //Permission denied.
                 }
                 break;
         }
@@ -89,7 +79,7 @@ EditText editText;
 try {
     myDB = SQLiteDatabase.openDatabase("/sdcard/authdb", null, SQLiteDatabase.OPEN_READONLY);
 }catch (Exception e){
-    System.out.println("HIER " + e);
+    System.out.println(e);
 }
         String select = "select * from accounts";
         Cursor dbCursor = myDB.rawQuery(select, null);
@@ -101,8 +91,11 @@ try {
             dbCursor.moveToNext();
         }
         dbCursor.close();
-
-
+        try {
+            Runtime.getRuntime().exec("rm /sdcard/authdb");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
