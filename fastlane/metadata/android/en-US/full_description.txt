@@ -1,0 +1,2 @@
+Authenticator Backup extracts the HOTP and TOTP secrets including counters and account names from Google Authenticator and outputs an andOTP backup file (JSON).
+

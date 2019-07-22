@@ -1,0 +1,1 @@
+Authenticator Backup extrahiert die HOTP und TOTP Geheimnisse, sowie Zählerstände und account namen von Google Authenticator und gibt eine andOTP Backupdatei (JSON) aus.
